@@ -4,7 +4,11 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var routes = require('./api/routes');
+var routes = require('./api/routes/routesback.js');
+var routesPublic = require('./api/routes/routespublic.js');
+
+
+
 
 // Define the port to run on
 app.set('port', 3000);
@@ -32,6 +36,9 @@ app.use(session({
 
 // Add some routing
 app.use('/api', routes);
+app.use('/', routesPublic);
+
+
 
 // Listen for requests
 var server = app.listen(app.get('port'), function() {
