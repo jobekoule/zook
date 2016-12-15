@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="test">
+  <head>
+    <meta charset="utf-8">
+    <title>Add post test</title>
+  </head>
+  <body ng-controller="testController as store">
+    <form ng-submit="store.addPost(this)">
+      Titre post : <input type="text" name="titre" ng-model="titre"/>
+      Texte post : <textarea name="texte" ng-model="texte"></textarea>
+      <input type="submit" />
+    </form>
+    <hr/>
+    Nb post pour ce zoo : {{posts.length}}
+    <ul>
+      <li ng-repeat="post in posts">
+        Titre : {{post.titre}}, Texte : {{post.texte}} <a href="#" ng-click="store.deletePost(post._id)">Supprimer ({{post._id}})</a>
+      </li>
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular.min.js"></script>
+    <script>
+    (function() {
+      var app = angular.module('test', []);
+      app.controller('testController', function(appService, $scope) {
+        $scope.posts = [];
+
+        // Méthode pour supprimer un post
+        this.deletePost = function(postid) {
+          console.log(postid);
+          if(postid.length) {
+            appService.deletePost(postid).then(function(data) {
+              appService.getAllPosts().then(function(data) {
+                $scope.posts = data.data;
+                console.log($scope.posts);
+              });
+            });
+          }
+        }
+
+        // Méthode d'ajout de post
+        this.addPost = function(form) {
+          var titre = form.titre;
+          var texte = form.texte;
+          if(titre.length > 0 && texte.length > 0) {
+            var post = {
+              titre: titre,
+              texte: texte
+            }
+            appService.addPost(post).then(function(data) {
+              appService.getAllPosts().then(function(data) {
+                $scope.posts = data.data;
+                console.log($scope.posts);
+              });
+            });
+          }
+        }
+
+        appService.getAllPosts().then(function(data) {
+          $scope.posts = data.data;
+          console.log($scope.posts);
+        });
+      });
+
+      app.factory('appService', function($http) {
+        return {
+          getAllPosts: getAllPosts,
+          addPost: addPost,
+          deletePost: deletePost
+        };
+        function getAllPosts() {
+          return $http.get('/api/posts/').then(complete).catch(failed);
+        }
+        function addPost(post) {
+          return $http.post('/api/posts/', {
+            post: post
+          }).then(complete).catch(failed);
+        }
+        function deletePost(postID) {
+          console.log(postID);
+          return $http.delete('/api/posts/'+postID).then(complete).catch(failed);
+        }
+        function complete(response) {
+          return response;
+        }
+        function failed(error) {
+          console.log(error.statusText);
+        }
+      });
+    })();
+    </script>
+  </body>
+</html>
