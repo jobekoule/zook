@@ -36,7 +36,9 @@ module.exports.login = function (req, res) {
           var motdepasseMD5 = crypto.createHash('md5').update(motdepasse).digest("hex");
           if(motdepasseMD5 === membre.motdepasse) {
             req.session.name = membre.nom;
-            res.redirect(302, '/content');
+            req.session.userID = membre._id;
+
+            res.redirect(302, '/home.html');
           }
         }
         else {

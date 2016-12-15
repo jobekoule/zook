@@ -14,8 +14,14 @@ var auth = function(req, res, next) {
 /////////////////////////////////////////
 
 var ctrlPosts = require('../controllers/posts.controllers.js');
+router.route('/posts').
+  post(auth, ctrlPosts.add).
+  get(auth, ctrlPosts.getAll);
 
-router.route('/posts').post(auth, ctrlPosts.add);
+router.route('/posts/:postID').delete(ctrlPosts.deleteOne);
 
+
+var ctrlMembres = require('../controllers/membres.controllers.js');
+router.route('/membres').get(auth, ctrlMembres.info);
 
 module.exports = router;

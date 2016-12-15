@@ -16,7 +16,9 @@ app.set('port', 3000);
 app.use(session({
     secret: 'supersecret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    httpOnly: false,
+    secure: false
 }));
 
 // Add middleware to console log every request
