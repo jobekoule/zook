@@ -24,4 +24,15 @@ router.route('/posts/:postID').delete(ctrlPosts.deleteOne);
 var ctrlMembres = require('../controllers/membres.controllers.js');
 router.route('/membres').get(auth, ctrlMembres.info);
 
+
+var ctrlCommentaires = require('../controllers/commentaires.controllers.js');
+router.route('/comment')
+.post(auth, ctrlCommentaires.add)
+.get(auth, ctrlCommentaires.getAllForThisPost)
+
+
+var ctrlAuthentification = require('../controllers/authentification.controllers.js');
+router.route('/membre')
+.post(ctrlAuthentification.add);
+
 module.exports = router;

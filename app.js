@@ -26,8 +26,8 @@ app.use(function(req, res, next) {
   console.log(req.method, req.url);
 
   // Si on essai d'accéder à la home sans session
-  if(!req.session.name && req.path === '/home.html') {
-    res.redirect(302, '/auth.html');
+  if(!req.session.name && req.path === '/dashboard.html') {
+    res.redirect(302, '/');
     // On redirige vers la connexion
   }
 

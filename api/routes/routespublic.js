@@ -19,9 +19,9 @@ var ctrlAuthentification = require('../controllers/authentification.controllers.
 router.route('/login').post(ctrlAuthentification.login);
 router.route('/content').get(auth, ctrlAuthentification.test);
 router.route('/logout').get(ctrlAuthentification.logout);
-router.route('/home.html', auth, function(req, res) {
+router.route('/dashboard.html', auth, function(req, res) {
   console.log('aa');
-  res.sendFile(path.join(__dirname, '../../public', 'home.html'));
+  res.sendFile(path.join(__dirname, '../../public', 'dashboard.html'));
 });
 // router.get('/home.html', auth, function(req, res) {
 //   console.log(req);

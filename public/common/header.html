@@ -1,14 +1,24 @@
-<nav class="haut">
-  <div class="nav-wrapper light-green lighten-1 autournav">
-    <form class="navbar-form navbar-right">
-      <div class="form-group">
-        <input type="email" class="form-control emapas connexion" placeholder="Email">
-        <input type="password" class="form-control emapas connexion" placeholder="Password">
-        <button class="btn waves-effect waves-light emapas" type="submit" name="action">Connexion</button>
+<div class="container">
+  <div class="row">
+    <div class="col s6"><span class="logo">Zook</span></div>
+    <div class="col s6">
+      <div style="float:right;">
+        <form method="POST" action="/login">
+          <table class="loginTable">
+            <tr>
+              <td style="color:white;">Adresse e-mail</td>
+              <td style="color:white;">Mot de passe</td>
+              <td rowspan="2"><input type="submit" value="Connexion" class="inputConnexionBtn"/></td>
+            </tr>
+            <tr>
+              <td><input type="text" value="" ng-model="inscription_email" name="email" class="inputConnexion"/></td>
+              <td><input type="password" value="" ng-model="inscription_motdepasse" name="motdepasse" class="inputConnexion"/></td>
+            </tr>
+          </table>
+
+
+        </form>
       </div>
-    </form>
-      <div class="logo">
-        <a href="default.asp"><img src="img/zouk-logo1.jpg" alt="logo"></a>
-      </div>
+    </div>
   </div>
-</nav>
+</div>

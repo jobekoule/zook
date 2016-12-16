@@ -1,35 +1,48 @@
 (function(){
- var app = angular.module('myApp',['ngRoute']);
+  var app = angular.module('zookApp',['ngRoute']);
 
-  // DECLARATION DU CONTROLLER
-  app.controller("myCtrl", function(){
-      //this.joseph = object;
-  });
+  app.controller('mainController', function(appService) {
+    this.createAccount = function(form) {
+      // Pas de vérifications, pas le temps
+      const membre = {
+        nom: form.nom,
+        email: form.email,
+        motdepasse: form.motdepasse,
+        adresse: form.adresse
+      };
+      appService.addMembre(membre).then(function(response) {
+        console.log(response);
+      });
 
-// DECLARATION DES DIRECTIVES
-  app.directive('header',function(){
-    return{
-      restrict:'A',
-      templateUrl:'common/header.html'
-    }
-  });
-  app.directive('footer',function(){
-    return{
-      restrict:'A',
-      templateUrl:'common/footer.html'
     }
   });
 
-  app.directive('home',function(){
-    return{
-      restrict:'A',
-      templateUrl:'home.html'
+  /// Section DIRECTIVES
+  app.directive('header', function() {
+    return {
+      templateUrl: 'common/header.html',
+      restrict: 'A'
     }
   });
-/*
-  app.config(["$routeProvider",function($routeProvider){
-    $routeProvider
-      .when("/",{
-          templateUrl:'public/home/home.html'
-  }); */
-  })();
+  app.directive('footer', function() {
+    return {
+      templateUrl: 'common/footer.html',
+      restrict: 'A'
+    }
+  });
+
+  app.factory('appService', function($http) {
+    return {
+      addMembre: addMembre
+    };
+    function addMembre(membre) {
+      return $http.post('/api/membre', membre).then(complete).catch(failed);
+    }
+    function complete(response) {
+      return response;
+    }
+    function failed(error) {
+      console.log(error.statusText);
+    }
+  });
+})();

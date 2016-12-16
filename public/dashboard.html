@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="dashApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" />
+    <link rel="stylesheet" href="css/styledash.css">
+  </head>
+  <body ng-controller="mainController as store">
+    <div header id="header"></div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col s2" style="background:white;min-height:550px;display:table">
+          <div style="display:table-cell;width:100%;height:550px;vertical-align:middle;text-align:center;">
+            PUBLICITE
+          </div>
+        </div>
+        <div class="col s8" style="min-height:550px;">
+          <form ng-submit="store.addPost(this)">
+            <div id="addpost">
+                <input type="text" name="titre" ng-model="titre" id="add" placeholder="Titre du post"/>
+                <hr/>
+                <textarea name="texte" ng-model="texte" placeholder="Exprimez-vous" id="addtext" ></textarea>
+            </div>
+            <div id="addpostvalid">
+              <span class="nbTotalPost" ng-show="posts.length">{{posts.length}} articles</span><input type="submit" class="waves-effect waves-light btn light-green darken-4" value="Publier"/>
+            </div>
+          </form>
+          <p ng-hide="posts.length" class="nopost">
+            Vous n'avez pas encore posté d'article !
+          </p>
+            <div class="post" ng-repeat="post in posts">
+              <div style="position:relative;top:10px;right:10px;width:100%;text-align:right;">
+                <a href="#" ng-click="store.deletePost(post._id)">
+                  <img src="img/cross.png" style="width:18px;opacity:0.5;"/>
+                </a>
+              </div>
+
+              <table style="width:100%;margin-top:-20px;">
+                <tr style="height:30px !important;line-height:inherit !important;">
+                  <td class="postTitre">Titre</td>
+                  <td class="postTitreContent">{{post.titre}}</td>
+                </tr>
+                <tr style="height:20px;">
+                  <td colspan="2" class="postDate">{{post.dateCreate | date}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="postTexteContent">{{post.texte}}</td>
+                </tr>
+              </table>
+              <div class="bloccommentaire" >
+                <span class="nbcomment" ng-show="master[$index].length">
+                  {{master[$index].length}} commentaires
+                </span>
+                <a href="javascript:void(0)" ng-hide="master[$index].length" class="linkComment" onclick="showBox(this);">Commenter</a>
+                <div ng-show="master[$index].length" class="commentbox">
+                  <form ng-submit="store.addComment(this, post._id)">
+                    <div style="padding-right:10px;">
+                      <input type="text" placeholder="Votre commentaire..." ng-model="commentaire"/>
+                      <input type="submit" value="Envoyer" style="display:none;"/>
+                    </div>
+
+                    <ul>
+                      <li ng-repeat="com in master[$index]">{{com.comment}} <br/><font color="#909090">{{com.dateCreate | date : "dd MMM y à H:mm"}}</font></li>
+                    </ul>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="col s2" style="background:white;min-height:550px;display:table;">
+          <div style="display:table-cell;width:100%;height:550px;vertical-align:middle;text-align:center;">
+            PUBLICITE
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div footer></div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.5.9/angular-locale_fr-fr.min.js"></script>
+    <script type="text/javascript" src="appdash.js"></script>
+    <script>
+
+        function showBox(elem) {
+          elem.setAttribute('class', 'linkComment ng-hide');
+          elem.parentNode.childNodes[5].setAttribute('class', 'commentbox');
+          elem.parentNode.childNodes[5].childNodes[1].childNodes[1].childNodes[1].focus();
+        }
+
+    </script>
+  </body>
+</html>

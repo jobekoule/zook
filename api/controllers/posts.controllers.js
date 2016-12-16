@@ -45,7 +45,7 @@ module.exports.getAll = function(req, res) {
   else {
     Posts.
     find({idMembre: req.session.userID}).
-    sort({ date: -1 } ).
+    sort({ dateCreate: -1 } ).
     exec(function(err, posts) {
       if(err) {
         res.status(500).json(err);

@@ -14,7 +14,21 @@
     Nb post pour ce zoo : {{posts.length}}
     <ul>
       <li ng-repeat="post in posts">
+        <div style="background:#ddd;margin:5px;">
         Titre : {{post.titre}}, Texte : {{post.texte}} <a href="#" ng-click="store.deletePost(post._id)">Supprimer ({{post._id}})</a>
+        <hr/>
+        Nb comment pour ce post : {{master[$index].length}}
+        <hr/>
+        Create comment :
+        <form ng-submit="store.addComment(this, post._id)">
+          <input type="text" placeholder="Votre commentaire" ng-model="commentaire"/>
+          <input type="submit" value="Envoyer"/>
+
+          <ul>
+            <li ng-repeat="com in master[$index]">{{com.comment}}</li>
+          </ul>
+        </form>
+        </div>
       </li>
     </ul>
 
@@ -23,16 +37,59 @@
     (function() {
       var app = angular.module('test', []);
       app.controller('testController', function(appService, $scope) {
+        var _this = this;
         $scope.posts = [];
+        $scope.master = [];
+        // $scope.test = function(postID) {
+        //   console.log('aaa', postID);
+        //   return "<h1>a</h1>";
+        // }
+        this.commentsFetch = function(arrayPosts) {
+
+          console.log("commentsFetch() :", arrayPosts)
+          for(var i=0;i<arrayPosts.length;i++) {
+            let postID = arrayPosts[i]._id;
+            console.log('IDpost', postID);
+            $scope.master = [];
+            appService.getAllComment(postID).then(function(data) {
+              let commentsForThisPost = data.data;
+              console.log(commentsForThisPost);
+
+              let key = postID;
+              let obj = {};
+              obj[key] = commentsForThisPost;
+
+              $scope.master.push(commentsForThisPost);
+              console.log('là', $scope.master)
+            });
+          }
+          console.log('ici',$scope.master)
+        }
+
+        // Methode pour ajouter un commentaire
+        this.addComment = function(form, postID) {
+          let commentaire = form.commentaire;
+          if(commentaire.length > 0) {
+            console.log(commentaire);
+            appService.addComment(postID, commentaire).then(function() {
+              appService.getAllPosts().then(function(data) {
+                $scope.posts = data.data;
+                // console.log($scope.posts);
+                _this.commentsFetch(data.data);
+              });
+            });
+          }
+        };
 
         // Méthode pour supprimer un post
         this.deletePost = function(postid) {
-          console.log(postid);
+          // console.log(postid);
           if(postid.length) {
             appService.deletePost(postid).then(function(data) {
               appService.getAllPosts().then(function(data) {
                 $scope.posts = data.data;
-                console.log($scope.posts);
+                // console.log($scope.posts);
+                _this.commentsFetch(data.data);
               });
             });
           }
@@ -50,7 +107,8 @@
             appService.addPost(post).then(function(data) {
               appService.getAllPosts().then(function(data) {
                 $scope.posts = data.data;
-                console.log($scope.posts);
+                // console.log($scope.posts);
+                _this.commentsFetch(data.data);
               });
             });
           }
@@ -58,7 +116,8 @@
 
         appService.getAllPosts().then(function(data) {
           $scope.posts = data.data;
-          console.log($scope.posts);
+          // console.log($scope.posts);
+          _this.commentsFetch(data.data);
         });
       });
 
@@ -66,8 +125,11 @@
         return {
           getAllPosts: getAllPosts,
           addPost: addPost,
-          deletePost: deletePost
+          deletePost: deletePost,
+          getAllComment: getAllComment,
+          addComment: addComment
         };
+
         function getAllPosts() {
           return $http.get('/api/posts/').then(complete).catch(failed);
         }
@@ -80,6 +142,20 @@
           console.log(postID);
           return $http.delete('/api/posts/'+postID).then(complete).catch(failed);
         }
+
+        // Methodes commentaires
+        function getAllComment(postID) {
+          return $http.get('/api/comment?postID='+postID, {
+            postID: postID
+          }).then(complete).catch(failed);
+        }
+        function addComment(postID, commentaire) {
+          return $http.post('/api/comment', {
+            postID: postID,
+            comment: commentaire
+          }).then(complete).catch(failed);
+        }
+
         function complete(response) {
           return response;
         }

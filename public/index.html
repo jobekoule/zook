@@ -1,31 +1,55 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="zookApp">
   <head>
     <meta charset="utf-8">
-    <title>zook</title>
-
-    <!-- Materialize -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" />
-    <!-- Latest compiled and minified JavaScript -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/style.css">
+    <title>Accueil zook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" />
+    <link rel="stylesheet" href="css/style.css">
   </head>
-  <body ng-controller="myCtrl">
+  <body ng-controller="mainController as store">
+    <div header id="header"></div>
 
-      <header header></header>
+    <div class="container">
+      <div class="row">
+        <div class="col s6" style="min-height:550px;">
+          <h5 class="aveczook">Avec Zook, partagez et restez en contact avec les autres zoo.</h5>
+          <img src="img/map.png" style="width:100%;margin-top:30px;"/>
+        </div>
+        <div class="col s6" style="min-height:550px;">
+          <h4><b>Inscription</b></h4>
+          <h5>C’est gratuit (et ça le restera toujours)</h5>
+          <!-- <form ng-submit="store.createAccount(this)">-->
+          <form method="POST" action="/api/membre">
+            <table style="width:100%;border-collapse:collapse;" class="loginTable">
+              <tr>
+                <td colspan="3"><input type="text" name="nom" ng-model="nom" class="inputInscription" placeholder="Nom du zoo" style="width:100%;"/></td>
+              </tr>
+              <tr>
+                <td><input type="text" name="email" ng-model="email" class="inputInscription" placeholder="Adresse email"/></td>
+                <td>&nbsp;</td>
+                <td><input type="text" class="inputInscription" placeholder="Confirmez votre email"/></td>
+              </tr>
+              <tr>
+                <td><input type="password" name="motdepasse" ng-model="motdepasse" class="inputInscription" placeholder="Mot de passe"/></td>
+                <td>&nbsp;</td>
+                <td><input type="password" class="inputInscription" placeholder="Confirmez le mot de passe"/></td>
+              </tr>
+              <tr>
+                <td colspan="3"><input type="text" name="adresse" ng-model="adresse" class="inputInscription" placeholder="Adresse postale du zoo" style="width:100%;"/></td>
+              </tr>
+            </table>
+            <center>
+              <input type="submit" class="waves-effect waves-light btn light-green darken-4" value="Inscription"/>
+            </center>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div footer></div>
 
-      <main home></main>
-
-      <footer footer></footer>
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <!-- Angular.min.JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
-  <!-- Angular-route.min.JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
-  <!-- app.js javascriptS -->
-  <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
   </body>
 </html>

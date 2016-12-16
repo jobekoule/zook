@@ -23,7 +23,7 @@ module.exports.login = function (req, res) {
   } else {
     const email = req.body.email;
     const motdepasse = req.body.motdepasse;
-
+    console.log(req.body);
     Membres.findOne({
       email: email
     }).exec((err, membre) => {
@@ -34,17 +34,23 @@ module.exports.login = function (req, res) {
         if(membre != null) {
           // Si on trouve un membre avec cet email
           var motdepasseMD5 = crypto.createHash('md5').update(motdepasse).digest("hex");
+          console.log(motdepasseMD5);
+          console.log(membre.motdepasse);
+
           if(motdepasseMD5 === membre.motdepasse) {
             req.session.name = membre.nom;
             req.session.userID = membre._id;
-
-            res.redirect(302, '/home.html');
+            console.log('aaa')
+            res.redirect(302, '/dashboard.html');
+          }
+          else {
+            res.redirect(302, '/');
           }
         }
         else {
           // Sinon, on redirect vers la page de connexion
           console.log('Pas de membre pour cet email');
-          res.redirect(302, '/auth.html');
+          res.redirect(302, '/');
         }
       }
     });
@@ -59,7 +65,7 @@ module.exports.login = function (req, res) {
 module.exports.logout = function(req, res) {
   req.session.destroy();
   console.log('Logout session');
-  res.redirect(302, '/auth.html');
+  res.redirect(302, '/');
 }
 
 module.exports.test = function(req, res, next) {
@@ -84,21 +90,22 @@ module.exports.test = function(req, res, next) {
 // }
 
 module.exports.add = (req, res) => {
+
   Membres
       .create({
         nom : req.body.nom,
         email : req.body.email,
-        motdepasse : req.body.motdepasse,
+        motdepasse : crypto.createHash('md5').update(req.body.motdepasse).digest("hex"),
         adresse : req.body.adresse
-      }, function(err, Membres){
+      }, function(err, membre){
         if(err){
           res
             .status(500)
             .json(err);
         } else {
-          res
-            .status(201)
-            .json(Membres);
+          req.session.name = membre.nom;
+          req.session.userID = membre._id;
+          res.redirect(302, '/dashboard.html');
         }
       });
 };

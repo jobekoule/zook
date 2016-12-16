@@ -1,98 +1,88 @@
-/* Photos Accueil*/
+@font-face {
+    font-family: 'soin_sans_neuemedium';
+    src: url('../fonts/soinsansneue-medium-webfont.eot');
+    src: url('../fonts/soinsansneue-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/soinsansneue-medium-webfont.woff2') format('woff2'),
+         url('../fonts/soinsansneue-medium-webfont.woff') format('woff'),
+         url('../fonts/soinsansneue-medium-webfont.ttf') format('truetype'),
+         url('../fonts/soinsansneue-medium-webfont.svg#soin_sans_neuemedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
+}
+@font-face {
+    font-family: 'soin_sans_neueroman';
+    src: url('../fonts/soinsansneue-roman-webfont.eot');
+    src: url('../fonts/soinsansneue-roman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/soinsansneue-roman-webfont.woff2') format('woff2'),
+         url('../fonts/soinsansneue-roman-webfont.woff') format('woff'),
+         url('../fonts/soinsansneue-roman-webfont.ttf') format('truetype'),
+         url('../fonts/soinsansneue-roman-webfont.svg#soin_sans_neueroman') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
-.emapas{
-  border:3px solid black !important;
-  font-weight: bold;
-  color: black !important;
-  margin:0 !important;
-  width:auto;
+}
+@font-face {
+    font-family: 'fb';
+    src: url('../fonts/fb.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
+  background: linear-gradient(#ffffff, #b9ffb2);
+    background-color: #69a74e;
+}
+#header {
+  width:100%;
+  height:100px;
+  background: linear-gradient(#67ae55, #578843);
+    background-color: #69a74e;
+}
+  #header .logo {
+    font-family: "Lucida Grande", "fb", sans-serif;
+    color:white;
+    font-size:35px;
+    margin-top: 22px;
+    display: inline-block;
   }
-
-.connexion{
-  border:3px solid black !important;
-  font-weight: bold;
-  color: black !important;
-/*  width:auto;*/
- }
-
-.logo{
-  margin-top: 3px;
-  }
-
-.autournav{
-  padding-top: 5px;
-  padding-left: 40px;
-  padding-right: 40px;
-  }
-
-.haut{
- height: 100px !important;
- }
-
-/* Formulaire */
-
- form {
-   /* Pour le centrer dans la page */
-
-   margin: 0 auto;
-   width: 300px;
-
-   /* Pour voir les limites du formulaire */
-   padding: 10em;
-   border: 3px solid #CCC;
- }
-
- div + div {
-   margin-top: 1em;
- }
-
- label {
-   /* Afin de s'assurer que toutes les étiquettes aient la même dimension et soient alignées correctement */
+.inputConnexion {
+  border:0 !important;
   display: inline-block;
-   width: 90px;
-   text-align: left;
- }
-
- input, textarea {
-   /* Afin de s'assurer que tous les champs textuels utilisent la même police
-      Par défaut, textarea utilise une police à espacement constant */
-   font: 10em sans-serif;
-
-   /* Pour donner la même dimension à tous les champs textuels */
-   width: 700px;
-
-   -moz-box-sizing: border-box;
-        box-sizing: border-box;
-
-   /* Pour harmoniser l'apparence des bordures des champs textuels */
-   border: 4px solid #999;
- }
-
- input:focus, textarea:focus {
-   /* Afin de réhausser les éléments actifs */
-   border-color: #000;
- }
-
- textarea {
-   /* Pour aligner correctement les champs multilignes et leurs étiquettes */
-   vertical-align: top;
-
-   /* Pour donner assez d'espace pour entrer du texte */
-   height: 5em;
-
-   /* Pour permettre aux utilisateurs de redimensionner un champ textuel horizontalement
-      Cela ne marche pas avec tous les navigateurs  */
-   resize: vertical;
- }
-
- .button {
-   /* Pour positionner les boutons de la même manière que les champs textuels */
-   padding-left: 90px; /* même dimension que les étiquettes */
- }
-
- button {
-   /* Cette marge représente approximativement le même espace
-      que celui entre les étiquettes et les champs textuels */
-   margin-left: .1em;
- }
+  width:inherit !important;
+  background:white!important;
+  height:25px !important;
+  margin-left: 5px;
+}
+.inputInscription {
+  border-radius: 3px;
+  border:1px solid rgba(0,0,0,.2) !important;
+  display: inline-block;
+  width:inherit !important;
+  background:white!important;
+  width:100% !important;
+  padding:4px !important;
+  height:28px !important;
+}
+.inputConnexionBtn {
+  background:#33691e;
+  border:0;
+  color:white;
+  height:26px !important;
+  padding: 2px 5px;
+  margin-top:8px;
+}
+.loginTable {
+  margin-top: 10px;
+}
+.loginTable td{
+  border-collapse: collapse;
+  margin:0;
+  padding:3px;
+}
+.aveczook {
+  display: inline-block;
+  margin-top: 50px;
+  font-family: "soin_sans_neuemedium", sans-serif;
+  font-size: 20px;
+}

@@ -1,0 +1,232 @@
+@font-face {
+    font-family: 'soin_sans_neuemedium';
+    src: url('../fonts/soinsansneue-medium-webfont.eot');
+    src: url('../fonts/soinsansneue-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/soinsansneue-medium-webfont.woff2') format('woff2'),
+         url('../fonts/soinsansneue-medium-webfont.woff') format('woff'),
+         url('../fonts/soinsansneue-medium-webfont.ttf') format('truetype'),
+         url('../fonts/soinsansneue-medium-webfont.svg#soin_sans_neuemedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'soin_sans_neueroman';
+    src: url('../fonts/soinsansneue-roman-webfont.eot');
+    src: url('../fonts/soinsansneue-roman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/soinsansneue-roman-webfont.woff2') format('woff2'),
+         url('../fonts/soinsansneue-roman-webfont.woff') format('woff'),
+         url('../fonts/soinsansneue-roman-webfont.ttf') format('truetype'),
+         url('../fonts/soinsansneue-roman-webfont.svg#soin_sans_neueroman') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'fb';
+    src: url('../fonts/fb.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+border-bottom: 1px solid #f00;
+box-shadow: 0 1px 0 0 #f00;
+border-bottom: none;
+box-shadow: none;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+body {
+  background-color: #d6ffd2;
+}
+#header {
+  width:100%;
+  height:43px;
+  background-color: #578843;
+}
+  #header .logo {
+    font-family: "Lucida Grande", "fb", sans-serif;
+    color:white;
+    font-size:18px;
+    margin-top: 8px;
+    display: inline-block;
+    background:white;
+    color:#578843;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-radius: 2px;
+  }
+  #header input {
+    border-radius: 2px;
+    border:0px solid rgba(0,0,0,.2) !important;
+    display: inline-block;
+    width:inherit !important;
+    background:white!important;
+    max-width:450px !important;
+    padding:4px !important;
+    height:19px !important;
+    position:relative;
+    top:-2px;
+    margin-left: 5px;
+  }
+#addpost {
+  background:white;
+  height:120px;
+  border-top:1px solid #81ff8a;
+  border-left:1px solid #81ff8a;
+  border-right:1px solid #81ff8a;
+  border-radius: 2px;
+  padding:10px;
+}
+#addpost hr {
+  border:0px;
+  height:1px;
+  background:#81ff8a;
+}
+#addpost input#add {
+  width:inherit !important;
+  background:white!important;
+  width:100% !important;
+  padding:4px !important;
+  border:0 !important;
+  height:30px !important;
+  margin: 0;
+}
+#addpost textarea#addtext {
+  width:inherit !important;
+  background:white!important;
+  width:100% !important;
+  padding:4px !important;
+  border:0 !important;
+  height:30px !important;
+  margin: 0;
+  resize:none;
+}
+input:focus {
+  border:0;
+}
+#addpostvalid {
+  width:100%;
+  background:#ecffed;
+  height:43px;
+  border-top:1px solid #cffdd3;
+  border-bottom:1px solid #81ff8a;
+  border-left:1px solid #81ff8a;
+  border-right:1px solid #81ff8a;
+}
+#addpostvalid input[type=submit] {
+  height:25px !important;
+  width:90px !important;
+  padding: 0!important;
+  font-size: 13px !important;
+  line-height: inherit !important;
+  margin-top: 7px;
+  margin-right: 10px;
+  float: right;
+}
+.nbTotalPost {
+  float:left;
+  color:#909090;
+  padding: 10px;
+}
+.post {
+  background:white;
+  border:1px solid #81ff8a;
+  border-radius: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.post table {
+  padding:10px !important;
+  display: block;
+}
+.post table td {
+  padding: 0;
+}
+td.postTitre {
+  color:#909090;
+  font-size: 18px;
+  width:10%;
+}
+td.postTitreContent {
+  color:#101010;
+  font-size: 18px;
+  width:90%;
+}
+td.postTexteContent {
+  color:#101010;
+  width:100%;
+  font-size: 21px;
+  padding-top: 5px !important;
+}
+td.postDate {
+  color:#bbb;
+  font-size: 13px;
+}
+
+.post hr {
+  border:0px;
+  height:1px;
+  background:#81ff8a;
+}
+
+.bloccommentaire {
+  border-top: 1px solid #cffdd3;
+  background:#ecffed;/*#dfffe1*/
+}
+.nbcomment {
+  font-size: 14px;
+  color:#909090;
+  padding: 0px 10px;
+  margin-top: 5px;
+  display: inline-block;
+}
+.linkComment {
+  display: inline-block;
+  padding: 10px;
+}
+.commentbox {
+  padding:10px;
+}
+.commentbox input[type=text] {
+  border:1px solid #ccc !important;
+  background:white !important;
+  padding:2px !important;
+  margin:0 !important;
+  height:25px !important;
+  width:100% !important;
+  display: inline !important;
+}
+.logout {
+  display: inline-block;
+  float: right;
+  margin-top: 11px;
+}
+.logout a:visited, .logout a:link, .logout:active {
+  color:white;
+}
+.nopost {
+  text-align: center;
+  font-size: 30px;
+  opacity:0.6;
+  color:#578843;
+  margin-top: 100px;
+}
