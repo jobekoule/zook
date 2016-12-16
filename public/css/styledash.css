@@ -230,3 +230,20 @@ td.postDate {
   color:#578843;
   margin-top: 100px;
 }
+.pub {
+  width:100%;
+  background:#ecffed;
+  border:1px solid #ddd;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.pub img {
+  width:100%;
+}
+.pub font {
+  font-size: 13px;
+  color:#333;
+  padding:5px;
+  display: inline-block;
+  font-weight: 400;
+}
